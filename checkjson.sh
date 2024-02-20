@@ -15,7 +15,7 @@ if [[ "$1" != *.json && "$1" != *.JSON ]]; then
     exit 1
 fi
 
-duplicates=$(jq -r '.[] | .' "$1" | sort | uniq -d | awk '{sub(/^\t/, ""); print $0 "("NR")"}')
+duplicates=$(jq -r '.[] | .' "$1" | sort | uniq -d | awk '{sub(/^\t/, ""); print $0 "("NR+1")"}')
 duplicates=${duplicates//\",(/\" \(}
 
 if [ -z "$duplicates" ]; then
